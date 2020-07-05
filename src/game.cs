@@ -4,7 +4,7 @@ class Game {
 	
 	public static void Main(){
 		UserIO.GameIO io = new UserIO.ConsoleIO();
-		string input = "";
+		string? input = "";
 		io.printLine("Welcome to the game");
 		while (input != "quit") {
 			input = io.readLine();
