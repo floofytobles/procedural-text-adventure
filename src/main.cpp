@@ -1,10 +1,11 @@
 
 #include "userio.h"
 #include "consoleio.h"
+#include <memory>
 
 int main(int argc, char *argv[]){
 	
-	IUserIO *io = new ConsoleIO();
+	std::unique_ptr<IUserIO> io = std::make_unique<ConsoleIO>();
 	io->printLine("Welcome to the game");
 	std::string input;
 	while (input != "quit"){
