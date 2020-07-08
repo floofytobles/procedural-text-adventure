@@ -3,7 +3,7 @@ Repository for a highly emergent procedurally generated sandbox fantasy text adv
 
 ## How to build (linux and similar)
 
-Make sure you have CMake and Make installed
+Make sure you have CMake and Make installed, and a C++ compiler (GCC or Clang).
 
 - Make and enter a directory `build`
 - Run `cmake` in that directory, with the directory that contains `CMakeLists.txt` as argument
