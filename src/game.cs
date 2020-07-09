@@ -3,16 +3,14 @@
 class Game {
 	
 	public static void Main(){
-		UserIO.GameIO io = new UserIO.ConsoleIO();
-		string? input = "";
-		io.printLine("Welcome to the game");
-		while (input != "quit") {
-			input = io.readLine();
-			if (input == null){
-				break;
-			}
-			io.printLine("You said: " + input);
+		Room room = new Room();
+		room.addCharacter(new AIMind(new Entity("Elf")));
+		PlayerMind player = new PlayerMind(new UserIO.ConsoleIO(), new Entity("Player"));
+		room.addCharacter(player);
+		room.addCharacter(new AIMind(new Entity("Dwarf")));
+		room.addCharacter(new AIMind(new Entity("Goblin")));
+		while (true) {
+			room.runRound();
 		}
-		io.printLine("Goodbye");
 	}
 }
