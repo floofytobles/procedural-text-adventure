@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 class Room {
 	
-	private ISet<Entity> entities = new HashSet<Entity>();
 	private List<Mind> minds = new List<Mind>();
 	
-	private string name;
+	private RoomData roomData;
 	
-	public Room(string name){
-		this.name = name;
+	
+	public Room(RoomData roomData){
+		this.roomData = roomData;
 	}
 	
 	public void runRound(){
@@ -28,7 +28,7 @@ class Room {
 	public void addCharacter(Mind mind){
 		this.entities.Add(mind.getBody());
 		this.minds.Add(mind);
-		mind.observe(new GameEvent("You are in " + this.describe()));
+		mind.observe(new GameEvent("You are in " + roomData.describe()));
 	}
 	
 	public GameEvent execute(Action action) {
