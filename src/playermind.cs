@@ -14,19 +14,38 @@ class PlayerMind : Mind {
 		this.io.printLine(gameEvent.describe());
 	}
 	
-	public Action decideAction(){
-		
-		ActionType? actionType = null;
-		
-		while (actionType == null){
+	private Command getCommand(){
+		while (true){
 			string? input = io.readLine();
-			actionType = Parser.readAction(input ?? "");
-			if (actionType == null) {
+			Command? command = Parser.parseCommand(input);
+			if (command == null) {
 				io.printLine("Invalid input: " + input);
+			} else {
+				return command;
 			}
 		}
-		Action action = new Action(actionType, this.body);
-		return action;
+	}
+	
+	public Action decideAction(){
+		while (true){
+			switch (getCommand()) {
+				case Command.GameAction actionCommand:
+					return new Action(actionCommand.action, this.body);
+				case Command.Query queryCommand:
+					io.printLine("You are blind");
+					break;
+				case Command.Meta metaCommand:
+					switch (metaCommand.command) {
+						case MetaCommand.Save _s:
+							io.printLine("Saving not implemented");
+							break;
+						case MetaCommand.Leave _l:
+							io.printLine("Leaving not implemented");
+							break;
+					}
+					break;
+			}
+		}
 	}
 	
 	public Entity getBody(){
