@@ -1,6 +1,6 @@
 
 
-class Action {
+public class Action {
 	
 	// todo: this will be a list
 	private Entity actor;

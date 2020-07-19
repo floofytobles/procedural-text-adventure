@@ -1,6 +1,6 @@
 
 
-class GameEvent {
+public class GameEvent {
 	
 	private string description;
 	

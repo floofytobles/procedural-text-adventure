@@ -12,16 +12,22 @@ class Universe {
 		this.room = room;
 	}
 	
+	public void mainLoop(){
+		while (true){
+			runRound();
+		}
+	}
+	
 	public void runRound(){
 		// runs a round of the main loop. All characters take a turn to take an action
 		foreach (Character character in characters) {
 			while (true){
-				Command command = character.mind.decideAction(character.body, room);
-				if (command is Command.GameAction actionCommand){
+				GameCommand command = character.mind.decideAction(character.body, room);
+				if (command is GameCommand.ActionCommand actionCommand){
 					executeAction(actionCommand.action);
 					break;
-				} else if (command is Command.Meta meta){
-					executeMeta();
+				} else if (command is GameCommand.Meta meta){
+					executeMeta(meta.command, meta.io);
 				}
 			}
 		}
@@ -29,15 +35,25 @@ class Universe {
 	
 	
 	public void addCharacter(Character character){
-		this.entities.Add(character.getBody());
+		this.room.entities.Add(character.body);
 		this.characters.Add(character);
-		character.observe(new GameEvent("You are in " + room.describe()));
+		character.mind.observe(new GameEvent("You are in " + room.name));
 	}
 	
-	public void execute(Action action) {
-		GameEvent result = action.getResult()
+	public void executeAction(Action action) {
+		GameEvent result = action.getResult();
 		foreach (Character observer in characters) {
-			observer.observe(result);
+			observer.mind.observe(result);
+		}
+	}
+	public void executeMeta(MetaCommand command, UserIO.GameIO io){
+		switch (command){
+			case MetaCommand.Save _s:
+				io.printLine("saving not implemented yet");
+				break;
+			case MetaCommand.Leave _s:
+				io.printLine("leaving not implemented yet. use Ctrl-C to stop the application");
+				break;
 		}
 	}
 }

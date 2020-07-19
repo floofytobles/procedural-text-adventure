@@ -1,6 +1,6 @@
 
 
-class Entity {
+public class Entity {
 	
 	private string name;
 	
