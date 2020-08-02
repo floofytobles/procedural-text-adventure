@@ -1,6 +1,6 @@
 
 
-public class ActionType {
+class ActionType {
 	
 	
 	private string description;

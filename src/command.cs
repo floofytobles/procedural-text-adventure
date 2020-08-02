@@ -2,7 +2,7 @@
 
 // This class works similar to haskell types or rust enums:
 // The value is one of a few different structures
-public abstract class Command {
+abstract class Command {
 	// don't allow anyone else to inherit from this class
 	private Command(){}
 

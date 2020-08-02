@@ -2,23 +2,14 @@
 
 class AIMind : Mind {
 	
-	private Entity body;
-	
-	public AIMind(Entity body){
-		this.body = body;
-	}
-	
-	public Action decideAction(){
+	public ConcreteCommand decideAction(RoomData room, Entity body){
 		System.Random rand = new System.Random();
 		ActionType actionType = ActionType.POSSIBLE_ACTIONS[rand.Next(ActionType.POSSIBLE_ACTIONS.Length)];
-		return new Action(actionType, this.body);
+		return new ConcreteCommand.GameAction(new Action(actionType, body));
 	}
 	
 	public void observe(GameEvent gameEvent){ }
 		
 	
-	public Entity getBody(){
-		return this.body;
-	}
 	
 }

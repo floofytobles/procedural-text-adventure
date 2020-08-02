@@ -3,11 +3,9 @@
 class PlayerMind : Mind {
 	
 	private UserIO.GameIO io;
-	private Entity body;
 	
-	public PlayerMind(UserIO.GameIO io, Entity body){
+	public PlayerMind(UserIO.GameIO io){
 		this.io = io;
-		this.body = body;
 	}
 	
 	public void observe(GameEvent gameEvent){
@@ -26,29 +24,17 @@ class PlayerMind : Mind {
 		}
 	}
 	
-	public Action decideAction(){
+	public ConcreteCommand decideAction(RoomData room, Entity body){
 		while (true){
 			switch (getCommand()) {
 				case Command.GameAction actionCommand:
-					return new Action(actionCommand.action, this.body);
+					return new ConcreteCommand.GameAction(new Action(actionCommand.action, body));
 				case Command.Query queryCommand:
 					io.printLine("You are blind");
 					break;
 				case Command.Meta metaCommand:
-					switch (metaCommand.command) {
-						case MetaCommand.Save _s:
-							io.printLine("Saving not implemented");
-							break;
-						case MetaCommand.Leave _l:
-							io.printLine("Leaving not implemented");
-							break;
-					}
-					break;
+					return new ConcreteCommand.Meta(metaCommand.command, this.io);
 			}
 		}
-	}
-	
-	public Entity getBody(){
-		return this.body;
 	}
 }
