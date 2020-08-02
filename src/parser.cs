@@ -2,9 +2,9 @@
 
 class Parser {
 	
-	public static Command? parseCommand(string? input){
+	public static InputCommand? parseCommand(string? input){
 		if (input == null){
-			return new Command.Meta(new MetaCommand.Leave());
+			return new InputCommand.Meta(new MetaCommand.Leave());
 		}
 		if (input == ""){
 			return null;
@@ -14,13 +14,13 @@ class Parser {
 			if (meta == null){
 				return null;
 			}
-			return new Command.Meta(meta);
+			return new InputCommand.Meta(meta);
 		}
 		ActionType? action = Parser.parseAction(input);
 		if (action == null){
 			return null;
 		}
-		return new Command.GameAction(action);
+		return new InputCommand.GameAction(action);
 	}
 	
 	public static ActionType? parseAction(string input){

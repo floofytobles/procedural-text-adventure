@@ -1,13 +1,13 @@
 
 using System.Collections.Generic;
 
-class RoomData {
+class Room {
 	
 	public ISet<Entity> entities = new HashSet<Entity>();
 	
 	public string name {get;}
 	
-	public RoomData(string name){
+	public Room(string name){
 		this.name = name;
 	}
 	

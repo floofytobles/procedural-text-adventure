@@ -1,5 +1,5 @@
 
-public abstract class Either<L, R>{
+abstract class Either<L, R>{
 	private Either(){}
 
 	public sealed class Left : Either<L, R>{

@@ -12,10 +12,10 @@ class PlayerMind : Mind {
 		this.io.printLine(gameEvent.describe());
 	}
 	
-	private Command getCommand(){
+	private InputCommand getCommand(){
 		while (true){
 			string? input = io.readLine();
-			Command? command = Parser.parseCommand(input);
+			InputCommand? command = Parser.parseCommand(input);
 			if (command == null) {
 				io.printLine("Invalid input: " + input);
 			} else {
@@ -24,15 +24,15 @@ class PlayerMind : Mind {
 		}
 	}
 	
-	public ConcreteCommand decideAction(RoomData room, Entity body){
+	public ConcreteCommand decideAction(Room room, Entity body){
 		while (true){
 			switch (getCommand()) {
-				case Command.GameAction actionCommand:
+				case InputCommand.GameAction actionCommand:
 					return new ConcreteCommand.GameAction(new Action(actionCommand.action, body));
-				case Command.Query queryCommand:
+				case InputCommand.Query queryCommand:
 					io.printLine("You are blind");
 					break;
-				case Command.Meta metaCommand:
+				case InputCommand.Meta metaCommand:
 					return new ConcreteCommand.Meta(metaCommand.command, this.io);
 			}
 		}

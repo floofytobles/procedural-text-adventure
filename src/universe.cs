@@ -5,10 +5,10 @@ class Universe {
 	
 	private List<Character> characters = new List<Character>();
 	
-	private RoomData room;
+	private Room room;
 	
 	
-	public Universe(RoomData room){
+	public Universe(Room room){
 		this.room = room;
 	}
 	

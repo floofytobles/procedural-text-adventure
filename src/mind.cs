@@ -3,6 +3,6 @@
 interface Mind {
 	
 	public void observe(GameEvent gameEvent);
-	public ConcreteCommand decideAction(RoomData room, Entity body);
+	public ConcreteCommand decideAction(Room room, Entity body);
 	
 }
